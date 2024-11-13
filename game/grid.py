@@ -1,5 +1,8 @@
 import collections
 
+ALIVE = "◾"
+DEAD = "."
+
 class LifeGrid:
     """
     The LifeGrid class takes care of two specific tasks:
@@ -43,10 +46,16 @@ class LifeGrid:
     def as_string(self, bbox):
         #represent the grid as a string that to be displayed in the terminal window
         #bbox defines which part of the grid is diplayed in the terminal window
-        pass
+        start_col, start_row, end_col, end_row = bbox
+        display = [self.pattern.name.center(2*(end_col - start_col))]
+        for row in range(start_row, end_row):
+            display_row = [
+                ALIVE if (row,col) in self.pattern.alive_cells else DEAD for col in range(start_col, end_col)
+            ]
+            display.append(" ".join(display_row))
+        return "\n ".join(display)
 
     def __str__(self):
-        #BUG : TypeError: __str__ returned non-string (type NoneType)
         return (
             f"{self.pattern.name}:\n"
             f"Alive cells -> {sorted(self.pattern.alive_cells)}"
