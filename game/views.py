@@ -3,6 +3,8 @@ from time import sleep
 
 from game.grid import LifeGrid
 
+__all__ = ['CursesView'] #allows to define the list of names that the underlying module will export as part of its public interface
+
 class CursesView:
     def __init__(self, pattern, gen=10, frame_rate=7, bbox=(0, 0, 20, 20)) :
         self.pattern = pattern
